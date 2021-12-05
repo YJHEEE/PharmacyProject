@@ -57,7 +57,7 @@ CREATE TABLE USERS (
 	USER_TELL   VARCHAR2(20)
 );
 
--- È¸¿øÁ¤º¸(¾à»ç)
+-- È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½)
 CREATE TABLE PHAM_USER (   
    PHAM_USER_ID   VARCHAR2(50),
    PHAM_NO   VARCHAR2(30),
@@ -94,7 +94,7 @@ CREATE TABLE DRUG_SHAPES (
     DRUG_IMAGE VARCHAR2(500)
 );
 
---½ÃÄö½º QNA_SEQ
+--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ QNA_SEQ
 CREATE SEQUENCE QNA_SEQ MAXVALUE 100 CYCLE NOCACHE;
 
 --------------------------------------ALTER-------------------------------------
@@ -104,17 +104,17 @@ CREATE SEQUENCE QNA_SEQ MAXVALUE 100 CYCLE NOCACHE;
 --------------------------------------INSERT------------------------------------
 INSERT INTO PHARMACY(pham_no, pham_name, pham_tell, pham_s_1, pham_c_1, pham_s_2, pham_c_2, pham_s_3, pham_c_3, pham_s_4, pham_c_4, pham_s_5, pham_c_5, 
                      pham_s_6, pham_c_6, pham_s_7, pham_c_7, pham_s_8, pham_c_8)
-            VALUES('999999', 'KH¾à±¹', '02-1234-5678', '0900', '2000', '0900', '2000', '0900', '2000', '0900', '2000', '0900', '2000', '1000', '1500', '', '', '', '');
-INSERT INTO QNA(q_num, pham_no, q_name, q_title, q_contents) VALUES (QNA_SEQ.NEXTVAL, '999999', 'È«±æµ¿', '¹®ÀÇµå¸³´Ï´Ù.', 'KF94 ÁßÇü ¸¶½ºÅ© »ì±¸»öÀ¸·Î 50°³ ¹Ù·Î ±¸¸Å°¡´ÉÇÒ±î¿ä');
+            VALUES('999999', 'KHï¿½à±¹', '02-1234-5678', '0900', '2000', '0900', '2000', '0900', '2000', '0900', '2000', '0900', '2000', '1000', '1500', '', '', '', '');
+INSERT INTO QNA(q_num, pham_no, q_name, q_title, q_contents) VALUES (QNA_SEQ.NEXTVAL, '999999', 'È«ï¿½æµ¿', 'ï¿½ï¿½ï¿½Çµå¸³ï¿½Ï´ï¿½.', 'KF94 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å© ï¿½ì±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 50ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½Ò±ï¿½ï¿½');
 INSERT INTO LOCATION (PHAM_NO, LOCATION_GU, LOCATION_ADDRESS, LOCATION_SUMMARY, LOCATION_LATITUDE, LOCATION_LONGITUDE) 
-            VALUES ('999999', '°­³²±¸', '¼­¿ïÆ¯º°½Ã °­³²±¸ Å×Çì¶õ·Î 14±æ 6', '³²µµºôµù 2F, 3F, 4F, 5F, 6F', '11.1234567', '111.1234567');
-INSERT INTO USERS (USER_ID, USER_PW, USER_NAME, USER_TELL) VALUES('users_khtest', '0000', '±èÈ¸¿ø', '010-5766-7979');
+            VALUES ('999999', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½Æ¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 14ï¿½ï¿½ 6', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2F, 3F, 4F, 5F, 6F', '11.1234567', '111.1234567');
+INSERT INTO USERS (USER_ID, USER_PW, USER_NAME, USER_TELL) VALUES('users_khtest', '0000', 'ï¿½ï¿½È¸ï¿½ï¿½', '010-5766-7979');
 INSERT INTO PHAM_USER (PHAM_USER_ID, PHAM_NO, PHAM_USER_PW) VALUES('pham_user_khtest', '999999','1234');
 INSERT INTO DBOOK_MARK (DRUG_CODE, USER_ID, DBOOK_SCORE) VALUES ('1', 'users_khtest', '7.8');
 INSERT INTO PBOOK_MARK (PHAM_NO, USER_ID, PBOOK_SCORE) VALUES ('999999', 'users_khtest', '9.0');
 INSERT INTO DRUG (DRUG_CODE,DRUG_NAME,DRUG_EFFECT,DRUG_USAGE,DRUG_PRECAUTIONS,DRUG_HOW_STORE,DRUG_MANUFACTOROR, DRUG_PRICE) 
-            VALUES ('1','Å¸ÀÌ·¹³î','ÇØ¿­Á¦','½ÄÈÄ30ºÐ','ÇÏ·çÇÑ°³','³ÃÀåº¸°ü','´ç±Ù¾àÇ°','5000');
-INSERT INTO DRUG_SHAPES (DRUG_CODE,DRUG_SHAPE,DRUG_COLOR,DRUG_IMAGE) VALUES('1','Å¸¿øÇü','Èò»ö','');
+            VALUES ('1','Å¸ï¿½Ì·ï¿½ï¿½ï¿½','ï¿½Ø¿ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½30ï¿½ï¿½','ï¿½Ï·ï¿½ï¿½Ñ°ï¿½','ï¿½ï¿½ï¿½åº¸ï¿½ï¿½','ï¿½ï¿½Ù¾ï¿½Ç°','5000');
+INSERT INTO DRUG_SHAPES (DRUG_CODE,DRUG_SHAPE,DRUG_COLOR,DRUG_IMAGE) VALUES('1','Å¸ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½','');
 
 --------------------------------------SELECT------------------------------------
 SELECT * FROM PHARMACY;
