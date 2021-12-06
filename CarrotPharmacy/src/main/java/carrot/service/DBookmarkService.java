@@ -1,9 +1,6 @@
 package carrot.service;
 
-import static carrot.common.jdbc.JDBCTemplate.close;
-import static carrot.common.jdbc.JDBCTemplate.commit;
-import static carrot.common.jdbc.JDBCTemplate.getConnection;
-import static carrot.common.jdbc.JDBCTemplate.rollback;
+import static carrot.common.jdbc.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -33,14 +30,8 @@ public class DBookmarkService {
 		close(conn);
 	}
 	
-	public static List<DBookmark> dBookmarksAllSearch(){
+	public static List<DBookmark> dBookmarksAllSearch(String id, String pw){
 		dbookmarkDao.setConn(conn);
-		return dbookmarkDao.selectDBookmark();
+		return dbookmarkDao.selectDBookmark(id, pw);
 	}
-	
-	public static void main(String[] args) {
-		List<DBookmark> result = DBookmarkService.dBookmarksAllSearch();
-		System.out.println(result);
-	}
-	
 }

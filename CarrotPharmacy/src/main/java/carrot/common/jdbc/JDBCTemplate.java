@@ -1,6 +1,7 @@
 package carrot.common.jdbc;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,29 +11,44 @@ import java.util.Properties;
 
 public class JDBCTemplate {
 	
-	public static Connection getConnection() {
-		Connection connection = null;
-		Properties porp = new Properties();
-		
-		String path = JDBCTemplate.class.getResource("./driver.properties").getPath();
-		path = path.replace("%20", " ");
-		
+	public static final int ERROR_CODE_USER_DUPLE = 100; // 유저 id 중복인 경우
+
+	public static String driverClass = null;
+	public static String url = null;
+	public static String user = null;
+	public static String password = null;
+
+	static {
+		Properties prop = new Properties();
+
 		try {
-			porp.load(new FileReader(path));
-			Class.forName(porp.getProperty("db.driver"));
-			
-			String url = porp.getProperty("db.url");
-			String name = porp.getProperty("db.username");
-			String pw = porp.getProperty("db.password");
-			connection = DriverManager.getConnection(url, name, pw);
-			connection.setAutoCommit(false);
-		} catch (Exception e) {
+			FileReader fr = new FileReader("resources/data-source.properties");
+			prop.load(fr);
+			fr.close();
+
+			driverClass = prop.getProperty("driverClass");
+			url = prop.getProperty("url");
+			user = prop.getProperty("user");
+			password = prop.getProperty("password");
+			Class.forName(driverClass);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		return connection;
 	}
-	
+
+	public static Connection getConnection() {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(url, user, password);
+			conn.setAutoCommit(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("conn : " +conn);
+		return conn;
+	}
 	
 	public static void commit(Connection connection) {
 		try {

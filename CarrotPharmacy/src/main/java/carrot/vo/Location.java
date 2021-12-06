@@ -6,21 +6,21 @@ public class Location {
 	private String location_address;
 	private String location_summary;
 	private String location_latitude;
-	private String location_longtitude;
+	private String location_longitude;
 
 	public Location() {
 		super();
 	}
 
 	public Location(String pham_no, String location_gu, String location_address, String location_summary,
-			String location_latitude, String location_longtitude) {
+			String location_latitude, String location_longitude) {
 		super();
 		this.pham_no = pham_no;
 		this.location_gu = location_gu;
 		this.location_address = location_address;
 		this.location_summary = location_summary;
 		this.location_latitude = location_latitude;
-		this.location_longtitude = location_longtitude;
+		this.location_longitude = location_longitude;
 	}
 
 	public String getPham_no() {
@@ -64,17 +64,17 @@ public class Location {
 	}
 
 	public String getLocation_longtitude() {
-		return location_longtitude;
+		return location_longitude;
 	}
 
-	public void setLocation_longtitude(String location_longtitude) {
-		this.location_longtitude = location_longtitude;
+	public void setLocation_longtitude(String location_longitude) {
+		this.location_longitude = location_longitude;
 	}
 
 	@Override
 	public String toString() {
 		return "Location [pham_no=" + pham_no + ", location_gu=" + location_gu + ", location_address="
 				+ location_address + ", location_summary=" + location_summary + ", location_latitude="
-				+ location_latitude + ", location_longtitude=" + location_longtitude + "]";
+				+ location_latitude + ", location_longitude=" + location_longitude + "]";
 	}
 }
