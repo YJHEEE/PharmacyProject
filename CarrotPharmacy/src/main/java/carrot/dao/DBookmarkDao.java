@@ -13,21 +13,11 @@ import carrot.vo.DBookmark;
 
 public class DBookmarkDao {
 	private Connection conn = null;
-	private Properties prop = null;
+	private static Properties prop = null;
 
-	public DBookmarkDao(Connection conn) {
+	public DBookmarkDao(Connection conn, Properties prop) {
 		this.conn = conn;
-
-		prop = new Properties();
-		FileReader fr;
-		
-		try {
-			fr = new FileReader("resources/carrot-query.properties");
-			prop.load(fr);
-			fr.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		this.prop = prop;
 	}
 
 	public void setConn(Connection conn) {
@@ -69,7 +59,7 @@ public class DBookmarkDao {
 		return list;
 	}
 
-	/*public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		Connection connection = getConnection();
 		DBookmarkDao dBookmarkDao = new DBookmarkDao(connection);
 

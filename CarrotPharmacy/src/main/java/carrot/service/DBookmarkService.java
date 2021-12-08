@@ -22,7 +22,7 @@ public class DBookmarkService {
 			close(conn);
 		}
 		conn = getConnection();
-		dbookmarkDao = new DBookmarkDao(conn);
+		dbookmarkDao = new DBookmarkDao(conn, getDBProperties());
 	}
 	
 	@Override

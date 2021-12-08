@@ -71,16 +71,16 @@ public class DrugDao {
 		return list;
 	}
 
-	public List<Drug> selectDrugManu(String searchDrugManu) {
+	public List<Drug> selectDrugManu(String selectDrugManu) {
 		List<Drug> list = new ArrayList<Drug>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			String sql = prop.getProperty("searchDrugManu");
+			String sql = prop.getProperty("selectDrugManu");
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+searchDrugManu+"%");
+			pstmt.setString(1, "%"+selectDrugManu+"%");
 			rs = pstmt.executeQuery();
 
 			while (rs.next() == true) {
@@ -113,7 +113,7 @@ public class DrugDao {
 //		Connection connection = getConnection();
 //		DrugDao DrugDao = new DrugDao(connection);
 //
-//		List<Drug> test = DrugDao.selectDrugManu("레놀");
+//		List<Drug> test = DrugDao.selectDrugName("레놀");
 //		System.out.println(test);
 //	}
 }

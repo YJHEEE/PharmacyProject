@@ -17,12 +17,16 @@ public class JDBCTemplate {
 	public static String url = null;
 	public static String user = null;
 	public static String password = null;
-
+	public static Properties qProp = null;
+	
 	static {
 		Properties prop = new Properties();
 
+		String path = JDBCTemplate.class.getResource("./data-source.properties").getPath();
+		path = path.replace("%20", " ");
+		
 		try {
-			FileReader fr = new FileReader("resources/data-source.properties");
+			FileReader fr = new FileReader(path);
 			prop.load(fr);
 			fr.close();
 
@@ -36,6 +40,31 @@ public class JDBCTemplate {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
+		
+		try {
+		
+			path = JDBCTemplate.class.getResource("./carrot-query.properties").getPath();
+			path = path.replace("%20", " ");
+			
+			qProp = new Properties();
+			FileReader fr;
+			
+			try {
+				fr = new FileReader(path);
+				qProp.load(fr);
+				fr.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	public static Properties getDBProperties() {
+		return qProp;
 	}
 
 	public static Connection getConnection() {
@@ -46,7 +75,7 @@ public class JDBCTemplate {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("conn : " +conn);
+		System.out.println("conn : " + conn);
 		return conn;
 	}
 	

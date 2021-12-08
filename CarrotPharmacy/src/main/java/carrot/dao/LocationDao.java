@@ -67,5 +67,13 @@ public class LocationDao {
 
 		return list;
 	}
+	
+	public static void main(String[] args) {
+	Connection connection = getConnection();
+	LocationDao LocationDao = new LocationDao(connection);
+
+	List<Location> test = LocationDao.selectLocation();
+	System.out.println(test);
+}
 
 }

@@ -2,68 +2,65 @@ package carrot.dao;
 
 import static carrot.common.jdbc.JDBCTemplate.*;
 
-import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+
 
 import carrot.vo.PhamUser;
 
 public class PhamUserDao {
-	private Connection conn = null;
-	private Properties prop = null;
-
-	public PhamUserDao(Connection conn) {
-		this.conn = conn;
-
-		prop = new Properties();
-		FileReader fr;
-		try {
-			fr = new FileReader("resources/carrot-query.properties");
-			prop.load(fr);
-			fr.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void setConn(Connection conn) {
-		this.conn = conn;
-	}
 	
-	public List<PhamUser> selectPhamUser() {
-		List<PhamUser> list = new ArrayList<PhamUser>();
+	public PhamUser fineUserId(Connection conn, String id) {
+		PhamUser user = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		String query = "SELECT * FROM PHAM_USER WHERE PHAM_USER_ID=?";
+		
 		try {
-			String query = prop.getProperty("selectPhamUser");
-
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-
-			while (rs.next() == true) {
-				String phamId = rs.getString("pham_user_id");
-				String phamNo = rs.getString("pham_no");
-				String phamUserPw = rs.getString("pham_user_pw");
-
-				PhamUser phamUser = new PhamUser(phamId, phamNo, phamUserPw);
-				list.add(phamUser);
+			
+			if(rs.next() == true) {
+				user = new PhamUser();
+				user.setPham_id(rs.getString("PHAM_USER_ID"));
+				user.setPham_no(rs.getString("PHAM_NO"));
+				user.setPham_user_pw(rs.getString("PHAM_USER_PW"));
 			}
-			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 			close(rs);
 		}
-		return list;
+		return user;
+	}
+	
+	public int insertUser(Connection connection, PhamUser user) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO PHAM_USER VALUES(?,?,?)";
+		try {
+			pstmt = connection.prepareStatement(query);
+			pstmt.setString(1, user.getPham_id());
+			pstmt.setString(2, user.getPham_no());
+			pstmt.setString(3, user.getPham_user_pw());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }
+
+
+
+
 
 
 
