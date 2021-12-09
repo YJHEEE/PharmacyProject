@@ -114,7 +114,15 @@ INSERT INTO DBOOK_MARK (DRUG_CODE, USER_ID, DBOOK_SCORE) VALUES ('1', 'users_kht
 INSERT INTO PBOOK_MARK (PHAM_NO, USER_ID, PBOOK_SCORE) VALUES ('999999', 'users_khtest', '9.0');
 INSERT INTO DRUG (DRUG_CODE,DRUG_NAME,DRUG_EFFECT,DRUG_USAGE,DRUG_PRECAUTIONS,DRUG_HOW_STORE,DRUG_MANUFACTOROR, DRUG_PRICE) 
             VALUES ('1','타이레놀','해열제','식후30분','하루한개','냉장보관','당근약품','5000');
+INSERT INTO DRUG (DRUG_CODE,DRUG_NAME,DRUG_EFFECT,DRUG_USAGE,DRUG_PRECAUTIONS,DRUG_HOW_STORE,DRUG_MANUFACTOROR, DRUG_PRICE) 
+            VALUES ('2','후시딘','연고','소독 후 얇게 도포','수시로','실온보관','KH약품','3000');
 INSERT INTO DRUG_SHAPES (DRUG_CODE,DRUG_SHAPE,DRUG_COLOR,DRUG_IMAGE) VALUES('1','타원형','흰색','');
+
+--------------------------------------UPDATE------------------------------------
+UPDATE DBOOK_MARK SET DBOOK_SCORE =? WHERE DRUG_CODE = ?;
+
+--------------------------------------DELETE------------------------------------
+DELETE FROM DBOOK_MARK WHERE DRUG_CODE = '1' AND USER_ID = 'users_khtest';
 
 --------------------------------------SELECT------------------------------------
 SELECT * FROM PHARMACY;

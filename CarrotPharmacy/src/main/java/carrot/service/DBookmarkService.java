@@ -3,35 +3,43 @@ package carrot.service;
 import static carrot.common.jdbc.JDBCTemplate.*;
 
 import java.sql.Connection;
-import java.util.List;
+import java.util.ArrayList;
 
 import carrot.dao.DBookmarkDao;
 import carrot.vo.DBookmark;
 
 
 public class DBookmarkService {
-	private static DBookmarkDao dbookmarkDao = null;
-	private static Connection conn = null;
-
-	public DBookmarkService() {
-		init();
-	}
-
-	public void init() {
-		if (conn != null) {
-			close(conn);
-		}
-		conn = getConnection();
-		dbookmarkDao = new DBookmarkDao(conn, getDBProperties());
+	private static DBookmarkDao dao = new DBookmarkDao();
+	
+	//의약품 북마크 전체 조회 메소드
+	public static ArrayList<DBookmark> searchAll(String id){
+		Connection connection = getConnection();
+		ArrayList<DBookmark> dBookmark = dao.searchAll(connection, id);
+		close(connection);
+		return dBookmark;
 	}
 	
-	@Override
-	protected void finalize() throws Throwable {
-		close(conn);
+	
+	//의약품 북마크 추가 메소드
+	public static int addDBookmark(String drugCode, String id, String score) {
+		Connection connection = getConnection();
+		int dBookmark = dao.addDBookmark(connection, drugCode, id, score);
+		close(connection);
+		return dBookmark;
 	}
 	
-	public static List<DBookmark> dBookmarksAllSearch(String id, String pw){
-		dbookmarkDao.setConn(conn);
-		return dbookmarkDao.selectDBookmark(id, pw);
+	
+	public static void main(String[] args) {
+		ArrayList<DBookmark> test = DBookmarkService.searchAll("users_khtest");
+		//int test = DBookmarkService.addDBookmark("1", "users_khtest", "10.0");
+		System.out.println(test);
 	}
+	
+	/*	public Pharmacy findPharmacyByNo(String no) {
+		Connection connection = getConnection();
+		Pharmacy pham = dao.findPharmacyByNo(connection, no);
+		close(connection);
+		return pham;
+	}*/
 }
